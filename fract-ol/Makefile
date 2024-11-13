@@ -23,13 +23,32 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) mlx
+$(NAME): $(LIBFT) mlx $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MFLAGS) $(LIBFT) -o $(NAME)
 
 mlx:
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		echo "Cloning minilibx-linux..."; \
+		git clone git@github.com:42Paris/minilibx-linux.git $(MLX_DIR); \
+	fi
 	make -C $(MLX_DIR) all
 
 $(LIBFT):
+	@if [ ! -d "$(LIBFT_DIR)/.git" ]; then \
+		echo "Cloning only 'libft' folder into $(LIBFT_DIR)..."; \
+		mkdir -p $(LIBFT_DIR); \
+		cd $(LIBFT_DIR) && \
+		git init && \
+		git remote add origin git@github.com:rafonsomartins/42Porto; \
+		git config core.sparseCheckout true; \
+		echo "libft/*" >> .git/info/sparse-checkout; \
+		git pull origin main; \
+	else \
+		echo "$(LIBFT_DIR) already initialized and cloned."; \
+	fi
+	mv libft/libft libft_1
+	rm -rf libft
+	mv libft_1 libft
 	make -C $(LIBFT_DIR)
 
 set: CFLAGS += -DGRADIENT=$(GRADIENT) -DMAX_ITER=$(MAX_ITER)

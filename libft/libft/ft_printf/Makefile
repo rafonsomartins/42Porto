@@ -3,7 +3,10 @@ FLAGS = -Wall -Werror -Wextra
 CC = cc
 LIBFT_DIR = ..
 LIBFT = $(LIBFT_DIR)/libft.a
-SRC = $(wildcard *.c)
+SRC = ft_printf.c \
+      ft_printf_strs.c \
+      ft_printf_itoa_variations.c \
+      ft_printf_itoa.c
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
