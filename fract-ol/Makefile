@@ -46,9 +46,6 @@ $(LIBFT):
 	else \
 		echo "$(LIBFT_DIR) already initialized and cloned."; \
 	fi
-	mv libft/libft libft_1
-	rm -rf libft
-	mv libft_1 libft
 	make -C $(LIBFT_DIR)
 
 set: CFLAGS += -DGRADIENT=$(GRADIENT) -DMAX_ITER=$(MAX_ITER)
