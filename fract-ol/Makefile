@@ -46,6 +46,9 @@ $(LIBFT):
 	else \
 		echo "$(LIBFT_DIR) already initialized and cloned."; \
 	fi
+	mv $(LIBFT_DIR) libft_buf
+	mv libft_buf/$(LIBFT_DIR) $(LIBFT_DIR)
+	rm -rf libft_buf
 	make -C $(LIBFT_DIR)
 
 set: CFLAGS += -DGRADIENT=$(GRADIENT) -DMAX_ITER=$(MAX_ITER)
@@ -61,5 +64,11 @@ fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT_DIR) fclean
 	make -C $(MLX_DIR) clean
+
+rmlibft:
+	rm -rf $(LIBFT_DIR)
+
+rmlx:
+	rm -rf $(MLX_DIR)
 
 re: fclean all

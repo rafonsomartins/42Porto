@@ -18,7 +18,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 	make -C $(PRINTF_DIR)
-	cp $(PRINTF_DIR)/libftprintf.a libftprintf.a
+	cp $(PRINTF_DIR)/libftprintf.a libft.a
 	rm $(PRINTF_DIR)/libftprintf.a
 
 clean:
